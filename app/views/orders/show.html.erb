@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order for:</strong>
+  <%= @order.order_for %>
+</p>
+
+<p>
+  <strong>From:</strong>
+  <%= @order.from %>
+</p>
+
+<p>
+  <strong>image:</strong>
+  <%= @order.mimg %>
+</p>
+
+<p>
+  <strong>image:</strong>
+  <%= image_tag(@order.image) %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

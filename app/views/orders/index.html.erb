@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Orders</h1>
+
+
+<%= form_tag orders_path, method: "get", class: "form1" do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
+  <%= submit_tag "Search" %>
+<% end %>
+<hr>
+<%= form_tag(orders_path, method: "get", remote: true) do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Enter search term" %>
+  <%= submit_tag "Search" %>
+<% end %>
+<div id="blogpost-table">
+
+<table>
+  <thead>
+    <tr>
+      <th>Order for</th>
+      <th>From</th>
+      <th>Mimg</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.order_for %></td>
+        <td><%= order.from %></td>
+        <td><%= order.mimg %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div id="search-results">
+
+</div>
+<br>
+
+<%= link_to 'New Order', new_order_path %>
