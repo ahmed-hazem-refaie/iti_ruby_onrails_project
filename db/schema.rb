@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_001335) do
+ActiveRecord::Schema.define(version: 2020_04_18_235540) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,12 +33,65 @@ ActiveRecord::Schema.define(version: 2020_04_18_001335) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activites", force: :cascade do |t|
+    t.text "action"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_activites_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.integer "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["group_id"], name: "index_friendships_on_group_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "owner_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_groups_on_owner_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id", null: false
+    t.integer "order_id", null: false
+    t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_notifications_on_order_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "orderdetails", force: :cascade do |t|
+    t.string "item"
+    t.integer "amount"
+    t.decimal "price"
+    t.text "comment"
+    t.integer "user_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_orderdetails_on_order_id"
+    t.index ["user_id"], name: "index_orderdetails_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.string "order_for"
     t.string "from"
     t.string "mimg"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,4 +107,14 @@ ActiveRecord::Schema.define(version: 2020_04_18_001335) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activites", "users"
+  add_foreign_key "friendships", "friends"
+  add_foreign_key "friendships", "groups"
+  add_foreign_key "friendships", "users"
+  add_foreign_key "groups", "owners"
+  add_foreign_key "notifications", "orders"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "orderdetails", "orders"
+  add_foreign_key "orderdetails", "users"
+  add_foreign_key "orders", "users"
 end
