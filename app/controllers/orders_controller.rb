@@ -23,7 +23,17 @@ class OrdersController < ApplicationController
 
   # GET /orders/new
   def new
+    if params[:request_user]
+      @user_all=User.all
+      respond_to do |format|
+        # format.json  { render :json => @user_all }
+        format.js { render partial: 'get-users'}
+      
+      end
+
+    else
     @order = Order.new
+    end
   end
 
   # GET /orders/1/edit

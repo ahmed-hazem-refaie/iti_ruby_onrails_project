@@ -1,16 +1,31 @@
+
+
+//////////
 <div class="container">
     <div class="row justify-content-md-center">
       <div class="col col-lg-8">
-  <form class="needs-validation" novalidate>
-    <div class="alert alert-danger d-none">Please review the problems below:</div>
+  <!-- <form class="needs-validation" novalidate> -->
+    <%= form_with(model: order, local: true) do |form| %>
+    <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.full_messages.each do |message| %>
+        <div class="alert alert-danger d-none"><%= message %></div>
+
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   
     <div class="form-group">
-      <label for="exampleInputName">Name</label>
+      <label for="exampleInputName">Order For</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">@</span>
         </div>
-        <input type="text" class="form-control" id="exampleInputName" placeholder="Your name" required>
+        <%= select_tag(:"order[order_for]", raw('<option value="BreackFast">BreackFast</option><option value="Dinner">Dinner</option><option value="lunch">lunch</option>')) %>
       </div>
       <div class="invalid-feedback">Name can't be blank</div>
       <div class="valid-feedback">Looks good!</div>
@@ -18,17 +33,17 @@
     </div>
   
     <div class="form-group">
-      <label for="exampleInputEmail">Email</label>
+      <label for="exampleInputEmail">From resturant</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">example-</span>
         </div>
-        <input type="email" class="form-control" id="exampleInputEmail" placeholder="Enter email" autocomplete="email" required>
+        <%= form.text_field :from %>
         <div class="input-group-append">
-          <span class="input-group-text" id="basic-addon1">@gmail.com</span>
+          <span class="input-group-text" id="basic-addon1">@KFC</span>
         </div>
       </div>
-      <div class="invalid-feedback">Email can't be blank</div>
+      <div class="invalid-feedback">order can't be blank</div>
       <div class="valid-feedback">Looks good!</div>
       <small class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
@@ -36,30 +51,16 @@
     <div class="form-group">
       <label for="exampleInputPassword">Password</label>
       <div class="input-group">
-        <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password" autocomplete="current-password" required>
+        <%= form.text_field :from %>
         <div class="input-group-append">
           <span class="input-group-text" id="basic-addon1">🙊</span>
         </div>
       </div>
-      <div class="invalid-feedback">Please provide a valid value.</div>
-      <div class="valid-feedback">Looks good!</div>
-      <small class="form-text text-muted">Password input example</small>
     </div>
   
-    <div class="form-group">
-      <label for="exampleTextareaBio">Bio</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">With textarea</span>
-        </div>
-        <textarea class="form-control" id="exampleTextareaBio" rows="2" placeholder="Tell us your story" required></textarea>
-      </div>
-      <div class="invalid-feedback">Please provide a valid value.</div>
-      <div class="valid-feedback">Looks good!</div>
-      <small class="form-text text-muted">Textarea input example</small>
-    </div>
   
-    <button type="submit" class="btn btn-primary">Create User!</button>
+  
+    <button type="submit" class="btn btn-primary">Create Order!!</button>
     <button type="reset" class="btn btn-outline-secondary">Cancel</button>
   </form>
   
@@ -97,3 +98,54 @@
   </div>
   </div>
   </div>
+
+//////////////////
+
+
+<%= form_with(model: order, local: true) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :order_for %>
+    <%= form.text_field :order_for %>
+    <%= select_tag(:"order[order_for]", raw('<option value="BreackFast">BreackFast</option><option value="Dinner">Dinner</option><option value="lunch">lunch</option>')) %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :from %>
+    <%= form.text_field :from %>
+  </div>
+
+   <div class="field">
+    <%= form.label 'add user or group' %>
+    <input type="text" name="user_get" class='getuser' placeholder="user get">
+
+  </div>
+
+
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image %>
+    
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<% end %>
+
+
