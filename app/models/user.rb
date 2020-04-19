@@ -8,5 +8,6 @@ class User < ApplicationRecord
   has_many:orderdetails
   has_many :friendships, foreign_key: :friend_id, class_name: 'Friendship'
   has_many :friends, through: :friendships
-  has_many:users
+  has_many:orders
+  has_many:notifications
 end
