@@ -8,9 +8,6 @@ class User < ApplicationRecord
   has_many:orderdetails
   has_many :friendships, foreign_key: :friend_id, class_name: 'Friendship'
   has_many :friends, through: :friendships
-
-  # 
-
-  has_many:notifications 
   has_many:orders, through: :notifications
+  has_many:notifications
 end

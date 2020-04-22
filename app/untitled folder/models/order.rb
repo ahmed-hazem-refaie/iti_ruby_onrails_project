@@ -1,11 +1,8 @@
 class Order < ApplicationRecord
-
     has_one_attached :image
     has_many:orderdetails
-
-    # llllll
-    
-    has_many :notifications
-    has_many :users, through: :notifications
+    belongs_to :user
+    has_many :notification 
+    has_many :orders, through: :notifications
     
 end
