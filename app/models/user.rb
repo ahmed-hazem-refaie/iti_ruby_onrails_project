@@ -8,8 +8,11 @@ class User < ApplicationRecord
   has_many:orderdetails
   has_many :friendships, foreign_key: :friend_id, class_name: 'Friendship'
   has_many :friends, through: :friendships
-  has_many:orders
+
+
+  #my order info hazem
   has_many:notifications
+  has_many:orders, through: :notifications
 
   devise :omniauthable, :omniauth_providers => [:facebook]
   # verify your schema for the additional fields/columns
