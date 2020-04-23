@@ -9,15 +9,15 @@
       </tr>
       <script>
     $('<input>').attr({
-    type: 'input',
+    type: 'hidden',
     id: 'foo',
-    name: 'userid[value]',
+    name: 'userid[]',
     value: '<%=user.id%>'
 }).appendTo('form');
 
 		$('.removeuser').on('click',(e)=>{
     console.log(e.target.value);
-    $(`:input[value=${e.target.value}]`).remove()
+    $(`:hidden[value=${e.target.value}]`).remove()
    $(e.target).parents('tr').remove()
 
 	})
