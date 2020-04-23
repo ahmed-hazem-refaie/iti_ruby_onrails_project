@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_235540) do
     t.integer "owner_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["owner_id"], name: "index_groups_on_owner_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_235540) do
   add_foreign_key "friendships", "friends"
   add_foreign_key "friendships", "groups"
   add_foreign_key "friendships", "users"
-  add_foreign_key "groups", "owners"
+  add_foreign_key "groups", "users"
   add_foreign_key "notifications", "orders"
   add_foreign_key "notifications", "users"
   add_foreign_key "orderdetails", "orders"

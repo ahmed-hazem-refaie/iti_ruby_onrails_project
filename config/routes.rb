@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
+  
+  devise_for :users, :paths => 'users'
+  
+  resources :activites
   resources :notifications
   resources :friendships
-  resources :orderdetails
-  resources :groups
-  resources :activites
-  devise_for :users
-  resources :orders
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  # resource  :users do
+    resources :groups
+  # end
+  resources :orders do
+    resources :orderdetails
+  end
+  
+    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
