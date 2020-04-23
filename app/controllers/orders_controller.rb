@@ -45,7 +45,9 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-# render  plain: params
+    @order.users<<(User.find(params[:userid]))
+    
+# render  plain: @order
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
