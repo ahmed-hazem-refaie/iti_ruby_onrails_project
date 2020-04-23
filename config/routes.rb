@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
   root :to => "home#home"
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
+  resources :activites
   resources :notifications
   resources :friendships
-  resources :orderdetails
-  resources :groups
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :activites
-  resources :orders
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # resource  :users do
+    resources :groups
+  # end
+  resources :orders do
+    resources :orderdetails
+  end
+  
+  
+  
+
+
+
 end
