@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  
-  devise_for :users, :paths => 'users'
+  root :to => "home#home"
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
   resources :activites
   resources :notifications
@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     resources :orderdetails
   end
   
-    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  
+
+
+
 end

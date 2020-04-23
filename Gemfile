@@ -63,3 +63,4 @@ gem 'pg_search'
 
 # devise
 gem 'devise'
+gem 'omniauth-facebook'

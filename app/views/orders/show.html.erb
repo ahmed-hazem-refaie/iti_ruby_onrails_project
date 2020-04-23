@@ -10,14 +10,20 @@
   <%= @order.from %>
 </p>
 
-<p>
-  <strong>image:</strong>
-  <%= @order.mimg %>
-</p>
+
 
 <p>
+  
+  <% if (@order.image.attached?)%>
   <strong>image:</strong>
   <%= image_tag(@order.image) %>
+  <%end%>
+
+</p>
+<p>
+<%= @order.users.each do |user|%>
+<h2> email: <%= user.email%>  </h2>
+<%end%>
 </p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |

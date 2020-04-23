@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_18_235540) do
+ActiveRecord::Schema.define(version: 2020_04_22_035559) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_04_18_235540) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
-    t.integer "owner_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 2020_04_18_235540) do
 
   create_table "notifications", force: :cascade do |t|
     t.text "body"
-    t.integer "user_id", null: false
-    t.integer "order_id", null: false
+    t.integer "user_id"
+    t.integer "order_id"
     t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -102,18 +102,20 @@ ActiveRecord::Schema.define(version: 2020_04_18_235540) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "provider"
+    t.string "uid"
+    t.string "name"
+    t.text "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activites", "users"
-  add_foreign_key "friendships", "friends"
   add_foreign_key "friendships", "groups"
   add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "groups", "users"
-  add_foreign_key "notifications", "orders"
-  add_foreign_key "notifications", "users"
   add_foreign_key "orderdetails", "orders"
   add_foreign_key "orderdetails", "users"
   add_foreign_key "orders", "users"
