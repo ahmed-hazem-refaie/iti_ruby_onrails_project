@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     if params[:request_user]
-      @user_all=User.all
+       @user_all=User.all
       respond_to do |format|
         # format.json  { render :json => @user_all }
         format.js { render partial: 'get-users'}
@@ -38,22 +38,25 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+
   end
 
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-render  plain: params
-    # respond_to do |format|
-    #   if @order.save
-    #     format.html { redirect_to @order, notice: 'Order was successfully created.' }
-    #     format.json { render :show, status: :created, location: @order }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @order.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    @order.users<<(User.find(params[:userid]))
+    
+# render  plain: params[:userid]
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.json { render :show, status: :created, location: @order }
+      else
+        format.html { render :new }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /orders/1

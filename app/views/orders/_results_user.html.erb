@@ -3,8 +3,9 @@
       <tr>
         <td><%= user.id %></td>
         <td><%= user.email %></td>
-            <td>oo</td>
-            <td>oo</td>
+            <td>ruby on rails</td>
+       
+            <td><button class="removeuser btn btn-primary" value=" <%=user.id %>">Remove</button></td>
       </tr>
       <script>
     $('<input>').attr({
@@ -13,6 +14,14 @@
     name: 'userid[]',
     value: '<%=user.id%>'
 }).appendTo('form');
+
+		$('.removeuser').on('click',(e)=>{
+    console.log(e.target.value);
+    $(`:hidden[value=${e.target.value}]`).remove()
+   $(e.target).parents('tr').remove()
+
+	})
       </script>
+
     <% end %>
     </table>
