@@ -46,11 +46,22 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order.users<<(User.find(params[:userid]))
+    users=User.find(params[:userid])
+    @order.users<<(users)
+    @order.user_id=current_user.id
     
 # render  plain: params[:userid]
     respond_to do |format|
       if @order.save
+      
+        users.each do |x| 
+          n=Notification.find_by({user_id:x.id,order_id:@order.id}); 
+          n.body="the #{current_user.email} add #{x.email} To0o this order";
+          n.type="bending"
+           n.save
+             end
+
+      
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
