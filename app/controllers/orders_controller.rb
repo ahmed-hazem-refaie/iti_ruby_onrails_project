@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
         users.each do |x| 
           n=Notification.find_by({user_id:x.id,order_id:@order.id}); 
           n.body="the #{current_user.email} add #{x.email} To0o this order";
-          n.type="bending"
+          n.status="bending"
            n.save
              end
 
