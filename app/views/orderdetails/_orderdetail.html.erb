@@ -1,0 +1,8 @@
+<tr>
+                <td><%= orderdetail.user_id  %></td>
+                <td><%= orderdetail.item %></td>
+                <td><%= orderdetail.amount %></td>
+                <td><%= orderdetail.price %></td>
+                <td><%= orderdetail.comment %></td> 
+                <td><%= link_to 'Cancel',order_orderdetail_path(orderdetail.order_id , orderdetail), method: :delete, data: { confirm: 'Are you sure?' } %></td></td>
+</tr>
