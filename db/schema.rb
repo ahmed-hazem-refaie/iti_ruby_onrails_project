@@ -106,15 +106,15 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
     t.string "uid"
     t.string "name"
     t.text "image"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email"], name: "index_users_on_email"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activites", "users"
-  add_foreign_key "friendships", "friends"
   add_foreign_key "friendships", "groups"
   add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "groups", "users"
   add_foreign_key "orderdetails", "orders"
   add_foreign_key "orderdetails", "users"
