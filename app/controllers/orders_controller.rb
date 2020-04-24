@@ -4,16 +4,17 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    if params[:search]
-      @search_results_orders = Order.all[0..10]
-      @par=params
-      respond_to do |format|
-        format.js { render partial: 'search-results'}
-        # format.json  { render :json => @search_results_orders }
-      end
-    else
     @orders = Order.all
-    end
+    # if params[:search]
+    #   @search_results_orders = Order.all[0..10]
+    #   @par=params
+    #   respond_to do |format|
+    #     format.js { render partial: 'search-results'}
+    #     # format.json  { render :json => @search_results_orders }
+    #   end
+    # else
+    # @orders = Order.all
+    # end
   end
 
   # GET /orders/1

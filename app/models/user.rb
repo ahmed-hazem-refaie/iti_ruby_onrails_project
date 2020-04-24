@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many:activites
   has_many:groups
   has_many:orderdetails
-  has_many :friendships, foreign_key: :friend_id, class_name: 'Friendship'
+  has_many :friendships
   has_many :friends, through: :friendships
 
 

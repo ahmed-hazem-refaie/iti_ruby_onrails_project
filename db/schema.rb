@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
   end
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "friend_id"
-    t.integer "group_id"
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.integer "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
@@ -112,9 +112,9 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "activites", "users"
-  add_foreign_key "friendships", "friends"
   add_foreign_key "friendships", "groups"
   add_foreign_key "friendships", "users"
+  add_foreign_key "friendships", "users", column: "friend_id"
   add_foreign_key "groups", "users"
   add_foreign_key "orderdetails", "orders"
   add_foreign_key "orderdetails", "users"

@@ -1,11 +1,12 @@
 class CreateFriendships < ActiveRecord::Migration[6.0]
   def change
     create_table :friendships do |t|
-      t.references :user, null: true, foreign_key: true
-      t.references :friend, null: true, foreign_key: true
+      t.references :user, null: false, foreign_key: true
+      t.references :friend, null: false
       t.references :group, null: true, foreign_key: true
 
       t.timestamps
     end
+    add_foreign_key :friendships, :users, column: :friend_id
   end
 end
