@@ -1,0 +1,40 @@
+<!-- Start of Group Section-->
+<div class="table-wrapper col-sm-4 shadow-sm group ">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Groups</h2>
+            </div>
+            <!--
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+                        </div>
+-->
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @groups.each do |group| %>
+            <tr>
+                <td><%= group.name %></td>
+                <td>
+                
+                    
+                    <%= link_to @group, method: :delete, data: { confirm: 'Are you sure?' }, remote: true,class:"delete" do %>
+                        <i class="material-icons">&#xE872;</i>
+                    <% end %>
+                    <%= link_to edit_group_path(group),class:"edit" do %>
+                        <i class="material-icons">&#xE254;</i>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div><!-- End of Group Section-->
