@@ -1,8 +1,8 @@
 
 
-<div class="container">
+<div class="container" style="background-color:gold">
     <div class="row justify-content-md-center">
-      <div class="col col-lg-8">
+      <div class="col col-lg-6">
   <!-- <form class="needs-validation" novalidate> -->
     <%= form_with(model: order, local: true) do |form| %>
     <% if order.errors.any? %>
@@ -32,7 +32,8 @@
     </div>
   
     <div class="form-group">
-      <label for="exampleInputEmail">From resturant</label>
+      <label for="exampleInputEmail">Add Group/Friends To My Order</label>
+      <hr>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">example-</span>
@@ -57,6 +58,7 @@
         </div>
       </div>
          <%= form.label :ADD_Image %>
+         <hr>
     <%= form.file_field :image , :class=> 'btn btn-primary' %>
     </div>
   
@@ -67,7 +69,7 @@
   </form>
   
   </div>
-      <div class="col col-lg-8">
+      <div class="col col-lg-6">
       <table class="mytable table table-hover table-dark">
     <thead>
       <tr>
@@ -88,4 +90,3 @@
   </div>
   </div>
 <%end%>
-////
