@@ -1,25 +1,27 @@
-<%= form_with(model: [ @order, @order.orderdetails.build ], html: { class: 'form-group',style:'width:200px;' }, local: true) do |form| %>
+<%= form_with(model: [ @order, @order.orderdetails.build ], html: { class: 'form-group',style:'width:800px;' }, local: true) do |form| %>
 
-
-  <div class="field">
+<div class="row">
+  <div class="field col-2">
     <%= form.label :item %>
     <%= form.text_field :item, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field col-2",style="width:50px;">
     <%= form.label :amount %>
     <%= form.number_field :amount, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field col-2" >
     <%= form.label :price %>
     <%= form.text_field :price, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field col-4">
     <%= form.label :comment %>
-    <%= form.text_area :comment, class:'form-control' %>
+    <%= form.text_area :comment, class:'form-control',style:'height:40px;' %>
   </div>
-    <%= form.submit %>
+  <div class="field col-2">
+    <%= form.submit "Add",style:'margin-top:40px;' %>
   </div>
+</div>
 <% end %>
