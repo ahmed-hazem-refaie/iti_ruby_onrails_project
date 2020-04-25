@@ -5,13 +5,18 @@ Rails.application.routes.draw do
   resources :activites
   resources :notifications
   resources :friendships
-
   # resource  :users do
     resources :groups
   # end
   resources :orders do
     resources :orderdetails
+    member do
+      post 'invited' 
+      post 'joined'
+    end
+    
   end
+  
   
   
   

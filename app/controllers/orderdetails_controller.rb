@@ -24,11 +24,17 @@ class OrderdetailsController < ApplicationController
   # POST /orderdetails
   # POST /orderdetails.json
   def create
-    @orderdetail = Orderdetail.new(orderdetail_params)
+    @order = Order.find(params[:order_id])
+    @orderdetail = @order.orderdetails.create(params.require(:orderdetail).permit(:item, :amount, :price, :comment))
+    @orderdetail.user=current_user
+    # if @orderdetail.save
+    #   red
+    # else
+    # end
 
     respond_to do |format|
       if @orderdetail.save
-        format.html { redirect_to @orderdetail, notice: 'Orderdetail was successfully created.' }
+        format.html { redirect_to :controller => 'orders', :action => 'show',:id => @order.id, notice: 'Orderdetail was successfully created.' }
         format.json { render :show, status: :created, location: @orderdetail }
       else
         format.html { render :new }
@@ -56,7 +62,7 @@ class OrderdetailsController < ApplicationController
   def destroy
     @orderdetail.destroy
     respond_to do |format|
-      format.html { redirect_to orderdetails_url, notice: 'Orderdetail was successfully destroyed.' }
+      format.html { redirect_to :controller => 'orders', :action => 'show',:id => @orderdetail.order_id, notice: 'Orderdetail was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

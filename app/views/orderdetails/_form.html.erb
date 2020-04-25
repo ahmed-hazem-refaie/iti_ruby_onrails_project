@@ -1,47 +1,27 @@
-<%= form_with(model: orderdetail, local: true) do |form| %>
-  <% if orderdetail.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(orderdetail.errors.count, "error") %> prohibited this orderdetail from being saved:</h2>
+<%= form_with(model: [ @order, @order.orderdetails.build ], html: { class: 'form-group',style:'width:800px;' }, local: true) do |form| %>
 
-      <ul>
-        <% orderdetail.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+<div class="row">
+  <div class="field col-2">
     <%= form.label :item %>
-    <%= form.text_field :item %>
+    <%= form.text_field :item, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field col-2",style="width:50px;">
     <%= form.label :amount %>
-    <%= form.number_field :amount %>
+    <%= form.number_field :amount, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field col-2" >
     <%= form.label :price %>
-    <%= form.text_field :price %>
+    <%= form.text_field :price, class:'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field col-4">
     <%= form.label :comment %>
-    <%= form.text_area :comment %>
+    <%= form.text_area :comment, class:'form-control',style:'height:40px;' %>
   </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="field col-2">
+    <%= form.submit "Add",style:'margin-top:40px;' %>
   </div>
-
-  <div class="field">
-    <%= form.label :order_id %>
-    <%= form.text_field :order_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>

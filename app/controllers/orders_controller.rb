@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :invited, :joined]
   before_action :authenticate_user!
   # GET /orders
   # GET /orders.json
@@ -20,8 +20,30 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    print "showwwwwwwwwwwwwwww"
+    @invited_no=@order.notifications.count
+    @accepted_no=@order.notifications.where(status:"accepted").count
   end
 
+  def invited
+    print "hellooooooooooooooooooooo"
+    @invited=@order.notifications
+    # current_user.friends.each do |m|
+    #   if(@invited.includes? m )
+    # end
+    print @invited
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  def joined
+    @joined=@order.notifications.where(status:"accepted")
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end 
   # GET /orders/new
   def new
     if params[:request_user]
@@ -46,11 +68,30 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order.users<<(User.find(params[:userid]))
-    
+    if params[:userid]
+    users=User.find(params[:userid])
+    @order.users<<(users)
+    @order.user_id=current_user.id
+    end
+   
+  
+
+  
 # render  plain: params[:userid]
     respond_to do |format|
-      if @order.save
+      if !users
+        format.html { redirect_to request.referer, alert: 'No Users Detected!' }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+
+      elsif @order.save
+        users.each do |x| 
+          n=Notification.find_by({user_id:x.id,order_id:@order.id}); 
+          n.body="the #{current_user.email} add #{x.email} To0o this order";
+          n.status="bending";
+           n.save
+             end
+
+      
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else

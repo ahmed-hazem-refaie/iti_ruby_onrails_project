@@ -1,8 +1,8 @@
 class Order < ApplicationRecord
 
     has_one_attached :image
-    has_many:orderdetails
-
+    has_many:orderdetails, dependent: :destroy
+    belongs_to  :user
     # llllll
     
     has_many :notifications
