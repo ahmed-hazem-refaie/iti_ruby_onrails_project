@@ -5,6 +5,7 @@ class NotificationsController < ApplicationController
   # GET /notifications.json
   def index
     @notifications = Notification.all
+    
   end
 
   # GET /notifications/1
@@ -15,6 +16,10 @@ class NotificationsController < ApplicationController
   # GET /notifications/new
   def new
     @notification = Notification.new
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /notifications/1/edit

@@ -13,7 +13,13 @@ Rails.application.routes.draw do
   end
   resources :orders do
     resources :orderdetails
+    member do
+      post 'invited' 
+      post 'joined'
+    end
+    
   end
+  
   
   
   

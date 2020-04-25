@@ -19,7 +19,7 @@
         <td><%= order.order_for, label='Order' %></td>
         <td><%= order.from, label='Resturants' %></td>
         # <td><%= order.mimg %></td>
-        <td><%= link_to 'View', order_orderdetails_path(order) %>
+        <td><%= link_to 'View', order_path(order) %>
         <%= link_to 'Finish', edit_order_path(order) %>
         <%= link_to 'Cancel', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

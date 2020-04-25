@@ -16,6 +16,10 @@ import "bootstrap"
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
 //= require jquery3
 //= require popper
+//= require turbolinks
 //= require bootstrap
+//= require_tree.
+//= require bootstrap-modal
