@@ -5,19 +5,7 @@ class FriendshipsController < ApplicationController
   # GET /friendships.json
   def index
     @friendships = Friendship.all
-    p "*********************"
-    p Friendship.all
-    p "******$$$$"
-    # p Friendship.joins(:User).select('User.email, User.name')
-    # p Friendship.joins(:User).where('User.id' => 1)
-    q= User.find(id=1)
-    p "@@@@@@@@@@@@@@@@@@"
-    p q.email
-    # p Friendship
-    # q.first.t_id
-    # q.first.t_name
-    p "********************"
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @users=User.all
     @friendship = Friendship.new
     # render template: "friendships/new"
 
@@ -46,7 +34,7 @@ class FriendshipsController < ApplicationController
     
     @friendship = Friendship.new(friendship_params)
     @friendship.user_id=current_user.id
-
+    @users=User.all
     @current_user
     respond_to do |format|
       if @friendship.save
