@@ -60,7 +60,9 @@ class OrderdetailsController < ApplicationController
   # DELETE /orderdetails/1
   # DELETE /orderdetails/1.json
   def destroy
-    @orderdetail.destroy
+    if (current_user == @orderdetail.user )
+        @orderdetail.destroy
+    end
     respond_to do |format|
       format.html { redirect_to :controller => 'orders', :action => 'show',:id => @orderdetail.order_id, notice: 'Orderdetail was successfully destroyed.' }
       format.json { head :no_content }

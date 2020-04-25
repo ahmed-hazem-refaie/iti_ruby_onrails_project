@@ -5,10 +5,14 @@
 </div>
 <div class="modal-body">
     <% @joined.each do |member| %>
-    <p> <%= member.user.email %></p>
-        <br>
+        <div class="card " style="width:300px">    
+            <div class="card-body">
+                <h4 class="card-title h6"><%= member.user.email %></h4>
+                
+            </div>
+            
+        </div>
     <% end %>
 </div>
 <div class="modal-footer">
-<button class="btn btn-primary">Save</button>
 </div>

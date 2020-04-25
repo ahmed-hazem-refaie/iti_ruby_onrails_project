@@ -20,25 +20,28 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    print "showwwwwwwwwwwwwwww"
     @invited_no=@order.notifications.count
     @accepted_no=@order.notifications.where(status:"accepted").count
   end
 
   def invited
-    print "hellooooooooooooooooooooo"
-    @invited=@order.notifications
-    # current_user.friends.each do |m|
-    #   if(@invited.includes? m )
-    # end
+    @invited=Array.new
+    if (current_user == @order.user )
+      print "ay 7aga"
+      @invited=@order.notifications
+    end
     print @invited
     respond_to do |format|
       format.html
       format.js
     end
   end
+
   def joined
-    @joined=@order.notifications.where(status:"accepted")
+    @joined=Array.new
+    if (current_user == @order.user )
+       @joined=@order.notifications.where(status:"accepted")
+    end
     respond_to do |format|
       format.html
       format.js

@@ -5,9 +5,12 @@ Rails.application.routes.draw do
   resources :activites
   resources :notifications
   resources :friendships
-  # resource  :users do
-    resources :groups
-  # end
+  resources :groups do
+    member do
+       delete 'remove/:friend_id', :action => 'remove',:as => 'remove'
+       post 'add_friend', :action => 'add_friend'
+      end
+  end
   resources :orders do
     resources :orderdetails
     member do
