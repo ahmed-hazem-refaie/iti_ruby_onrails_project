@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "image", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -104,9 +106,7 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "uid"
-    t.string "name"
-    t.text "image"
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

@@ -32,7 +32,9 @@
     </nav>
     <div class="container mt-3">
         <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
+            Logged in as <strong><%= current_user.email %></strong>.
+            <br>
+            User image <img src="<%= current_user.image %>" >
         <%end%>
         <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
