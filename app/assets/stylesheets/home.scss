@@ -1,3 +1,17 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+img.profile-pic{
+    border-radius: 50%;
+}
+fieldset{
+    border: 1px solid #7c7c7d;
+    border-radius: 7px;
+    height: 100%;
+    padding: 0 20px;
+    legend{
+        width: auto;
+        margin-left: -5px;
+    }
+}

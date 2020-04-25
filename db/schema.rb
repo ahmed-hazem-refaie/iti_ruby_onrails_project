@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_005213) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "friend_id", null: false
-    t.integer "group_id"
+    t.integer "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_005213) do
     t.text "body"
     t.integer "user_id"
     t.integer "order_id"
-    t.string "status"
+    t.string "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "notification_type"

@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many:notifications
   has_many:orders, through: :notifications
 
-  devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2]
+  devise :omniauthable, :omniauth_providers => [:facebook,:google]
   # devise :rememberable, :omniauthable, omniauth_providers: []
 
   # verify your schema for the additional fields/columns
