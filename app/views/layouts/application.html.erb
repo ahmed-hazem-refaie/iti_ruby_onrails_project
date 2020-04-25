@@ -63,7 +63,7 @@
             $.ajax('http://localhost:3000/orders/new', {
                 type: 'GET', // http method
                 data: {
-                    request_user: 'This is my data.'
+                    request_user:e.target.value
                 }, // data to submit
                 success: function(data, status, xhr) {
                     console.log(data)
