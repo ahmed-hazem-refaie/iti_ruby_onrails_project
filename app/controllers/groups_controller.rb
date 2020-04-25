@@ -16,8 +16,9 @@ class GroupsController < ApplicationController
     @friends = Friendship.where(["group_id = ?", @group])
     @users=[]
     @friends.each do |friend|
-      @users.push(User.where(["id = ?", friend.friend_id]).first)
+    @users.push(User.where(["id = ?", friend.friend_id]).first)
     end
+    @groups = current_user.groups
 
   end
 
@@ -70,11 +71,32 @@ class GroupsController < ApplicationController
     end
   end
   def remove
-  f = Friendship.where(["group_id = ? and friend_id = ?", params[:id],params[:friend_id]]).update_all( group_id: nil )
-   respond_to do |format|
-    format.html { redirect_to group_url, notice: 'Friend was successfully Removed.' }
-    format.json { head :no_content }
+    f = Friendship.where(["group_id = ? and friend_id = ?", params[:id],params[:friend_id]]).update_all( group_id: nil )
+    respond_to do |format|
+      format.html { redirect_to group_url, notice: 'Friend was successfully Removed.' }
+      format.json { head :no_content }
+    end
   end
+  def add_friend
+    @friend = User.where(["email = ?",params[:search]])
+    if @friend.empty?
+      flash[:alert] = "Error! : Invalid friend email"
+      redirect_to group_url
+    else 
+      @f = Friendship.where(["user_id = ? and friend_id = ?", current_user.id,@friend.first.id]).update_all( group_id: params[:id])
+      puts @f
+      puts "heyyyyyy"
+      if @f != 0
+        respond_to do |format|
+          format.html { redirect_to group_url, notice: 'Friend was successfully Added.' }
+          format.json { head :no_content }
+        end
+      else
+        flash[:alert] = "Error! : You both are not friends"
+        redirect_to group_url
+      end
+    end
+    
   end
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -1,8 +1,18 @@
-<p id="notice"><%= notice %></p>
+ <div class="wrap">
+    <div class="container">
+    <%= link_to "Back to my Groups", groups_path,class:"btn btn-danger" %>
+        <h1>Groups</h1>
+        <div class="justify-content-between">
+            <%= render "groups/new", locals: { group: @group } %>
+        </div>
+        <div class="row">
+            <%= render 'groups' , locals: { groups: @groups }%>
+            <%= render 'friends', locals: { users: @users } %>
+        </div>
+    </div>
+</div>
 
-<!--<% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>   
-      </tr>
-    <% end %>-->
- <%= render 'friends', locals: { users: @users } %>
+
+
+
+ 

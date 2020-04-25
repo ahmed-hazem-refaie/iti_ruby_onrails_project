@@ -1,18 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert"><%= value %></div>
+<% end %>
 <div class="wrap">
-<div class="container">
-    <h1>Groups</h1>
-    <div class="justify-content-between">
-        <%= render "groups/new", locals: { group: @group } %>
+    <div class="container">
+    
+        <h1>Groups</h1>
+        <div class="justify-content-between">
+            <%= render "groups/new", locals: { group: @group } %>
+        </div>
+        <div class="row">
+            <%= render 'groups' , locals: { groups: @groups }%>
+            <%= render 'friends' %>
+        </div>
     </div>
-    <div class="row">
-        <!-- Start of Group Section-->
-        <%= render 'groups' , locals: { groups: @groups }%>
-        <!-- End of Group Section-->
-
-        <!-- Start of Friends Section-->
-        <%= render 'friends', locals: { friends: @friends } %>
-        <!-- End of Friends Section-->
-    </div>
-</div>
 </div>
