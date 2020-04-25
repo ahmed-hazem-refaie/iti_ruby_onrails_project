@@ -46,18 +46,26 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    if params[:userid]
     users=User.find(params[:userid])
     @order.users<<(users)
     @order.user_id=current_user.id
-    
+    end
+   
+  
+
+  
 # render  plain: params[:userid]
     respond_to do |format|
-      if @order.save
-      
+      if !users
+        format.html { redirect_to request.referer, alert: 'No Users Detected!' }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+
+      elsif @order.save
         users.each do |x| 
           n=Notification.find_by({user_id:x.id,order_id:@order.id}); 
           n.body="the #{current_user.email} add #{x.email} To0o this order";
-          n.status="bending"
+          n.status="bending";
            n.save
              end
 
