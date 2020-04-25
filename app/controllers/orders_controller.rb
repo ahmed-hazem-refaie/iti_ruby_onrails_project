@@ -50,7 +50,20 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     if params[:request_user]
-       @user_all=User.all
+       @user_all=[]
+       @group = Group.find_by({name:params[:request_user]})
+       if @group
+       @friends = Friendship.where(["group_id = ?", @group])
+       @friends.each do |friend|
+       @user_all.push(User.where(["id = ?", friend.friend_id]).first);     
+      end
+    else
+      @xx = User.find_by("email = ? OR name = ?", params[:request_user], params[:request_user]);
+          if @xx
+      @user_all.push(@xx);
+          end
+    end
+      
       respond_to do |format|
         # format.json  { render :json => @user_all }
         format.js { render partial: 'get-users'}

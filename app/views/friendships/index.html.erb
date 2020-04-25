@@ -17,9 +17,9 @@
     <% @friendships.each do |friendship| %>
       <tr>
         <td><%= friendship.friend.email %></td>
-       
+        <td> <%= image_tag(friendship.friend.register_image, size: "160x100")%></td>
         <td><%= link_to 'Destroy', friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      </tr>  
     <% end %>
   </tbody>
 </table>

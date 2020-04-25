@@ -1,12 +1,17 @@
     <table class="table table-hover table-dark">
+    <%if @user_all.length > 0 %>
  <% @user_all.each  do |user| %>
       <tr>
         <td><%= user.id %></td>
         <td><%= user.email %></td>
-            <td>ruby on rails</td>
+            <td><% if current_user.image != "" %>
+                User image <%= image_tag(current_user.image, size: "100x100")%>   
+            <% else %>
+                User image <%= image_tag(current_user.register_image, size: "100x100")%>
+            <% end %></td>
        
             <td><button class="removeuser btn btn-primary" value=" <%=user.id %>">Remove</button></td>
-      </tr>
+  </tr>
       <script>
     $('<input>').attr({
     type: 'hidden',
@@ -24,4 +29,10 @@
       </script>
 
     <% end %>
+    <%else%>
+    <tr>
+<td colspan="4" >not found <%=@group%></td>
+
+    </tr>
+    <%end%>
     </table>
