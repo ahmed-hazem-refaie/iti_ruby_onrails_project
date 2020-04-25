@@ -27,16 +27,14 @@ class OrderdetailsController < ApplicationController
     @order = Order.find(params[:order_id])
     @orderdetail = @order.orderdetails.create(params.require(:orderdetail).permit(:item, :amount, :price, :comment))
     @orderdetail.user=current_user
-    # if @orderdetail.save
-    #   red
-    # else
-    # end
 
     respond_to do |format|
       if @orderdetail.save
-        format.html { redirect_to :controller => 'orders', :action => 'show',:id => @order.id, notice: 'Orderdetail was successfully created.' }
+        flash[:success] = "Orderdetail was successfully created."
+        format.html { redirect_to :controller => 'orders', :action => 'show',:id => @order.id }
         format.json { render :show, status: :created, location: @orderdetail }
       else
+        flash[:alert] = "error,cann't save."
         format.html { render :new }
         format.json { render json: @orderdetail.errors, status: :unprocessable_entity }
       end
@@ -64,7 +62,8 @@ class OrderdetailsController < ApplicationController
         @orderdetail.destroy
     end
     respond_to do |format|
-      format.html { redirect_to :controller => 'orders', :action => 'show',:id => @orderdetail.order_id, notice: 'Orderdetail was successfully destroyed.' }
+      flash[:success] = "Orderdetail was successfully destroyed."
+      format.html { redirect_to :controller => 'orders', :action => 'show',:id => @orderdetail.order_id }
       format.json { head :no_content }
     end
   end

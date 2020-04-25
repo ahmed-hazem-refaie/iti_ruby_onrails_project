@@ -8,10 +8,9 @@
                 
             <div class="card " style="width:300px">    
                 <div class="card-body">
-                    <h4 class="card-title h6"><%= member.user.email %></h4>
+                    <h4 class="card-title h6"><%= member.user.name %></h4>
                     <p class="card-text">
-                    <p><%= member.order %></p>
-                    <%= link_to "Remove",'#',method: :delete,data: { confirm: 'Are you sure you want to remove friend?' },class:"btn btn-danger" %>
+                    <%= link_to "Remove",notification_path(member),method: :delete,data: { confirm: 'Are you sure you want to remove friend?' },class:"btn btn-danger" %>
             
                     </p>
                 </div>

@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |key, value| %>
+  <div class="alert alert-info"><%= value %></div>
+<% end %>
 
 <h1>Orderdetails</h1>
 <div class="row">
