@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many:orderdetails, dependent: :destroy
   has_many :friendships
   has_many :friends, through: :friendships
+  has_one_attached :register_image
 
 
   #my order info hazem
@@ -26,11 +27,13 @@ class User < ApplicationRecord
       end
     end
     def self.from_omniauth(auth)
+      print "*********************"
+      print auth
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+      user.name = auth.info.name 
+      user.image = auth.info.image 
     end
   end
 end

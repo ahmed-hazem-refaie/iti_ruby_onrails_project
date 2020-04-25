@@ -8,7 +8,9 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -32,7 +34,13 @@
     </nav>
     <div class="container mt-3">
         <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
+            Logged in as <strong><%= current_user.email %></strong>.
+            <br>
+            <% if current_user.image != "" %>
+                User image <%= image_tag(current_user.image, size: "100x100")%>   
+            <% else %>
+                User image <%= image_tag(current_user.register_image, size: "160x100")%>
+            <% end %>
         <%end%>
         <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
