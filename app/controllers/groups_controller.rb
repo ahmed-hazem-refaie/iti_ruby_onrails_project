@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [ :edit, :update, :destroy]
 
   # GET /groups
   # GET /groups.json
@@ -12,6 +12,13 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @group = Group.find(params[:id])
+    @friends = Friendship.where(["group_id = ?", @group])
+    @users=[]
+    @friends.each do |friend|
+      @users.push(User.where(["id = ?", friend.friend_id]).first)
+    end
+
   end
 
   # GET /groups/new
@@ -62,7 +69,13 @@ class GroupsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def remove
+  f = Friendship.where(["group_id = ? and friend_id = ?", params[:id],params[:friend_id]]).update_all( group_id: nil )
+   respond_to do |format|
+    format.html { redirect_to group_url, notice: 'Friend was successfully Removed.' }
+    format.json { head :no_content }
+  end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group

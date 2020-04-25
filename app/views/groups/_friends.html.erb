@@ -18,13 +18,27 @@
     </div>
     <!--Start of All Cards -->
     <div class="card-columns text-center">
+       <% @users.each do |user| %>
         <div class="card" style="width:150px">
+
             <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Friend Image">
             <div class="card-body">
-                <h4 class="card-title h6">Friend Name</h4>
-                <p class="card-text"><a href="#" class="btn btn-danger">Remove</a></p>
+                <h4 class="card-title h6"><%= user.email %></h4>
+                <p class="card-text">
+                <%# <%= link_to 'Remove', user, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger" %> %>
+                <%= link_to "Remove", remove_group_path(@group,user.id),method: :delete,data: { confirm: 'Are you sure?' } %>
+                <%# <%= request.params["id"]%> %>
+                
+
+                        
+                <%# <a href="#" class="btn btn-danger">Remove</a> %>
+                
+                
+                </p>
             </div>
         </div>
+        <% end %>
+
         <!--End of one Card-->
     </div>
     <!--End of All Cards-->

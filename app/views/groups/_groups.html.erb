@@ -22,11 +22,10 @@
         <tbody>
         <% @groups.each do |group| %>
             <tr>
-                <td><%= group.name %></td>
+                <td><%= link_to group.name, group %></td>
                 <td>
                 
-                    
-                    <%= link_to @group, method: :delete, data: { confirm: 'Are you sure?' }, remote: true,class:"delete" do %>
+                    <%= link_to group, method: :delete, data: { confirm: 'Are you sure?' }, remote: true,class:"delete" do %>
                         <i class="material-icons">&#xE872;</i>
                     <% end %>
                     <%= link_to edit_group_path(group),class:"edit" do %>

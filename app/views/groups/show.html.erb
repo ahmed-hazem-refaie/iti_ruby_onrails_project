@@ -1,14 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
-
-<p>
-  <strong>user:</strong>
-  <%= @group.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+<!--<% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>   
+      </tr>
+    <% end %>-->
+ <%= render 'friends', locals: { users: @users } %>

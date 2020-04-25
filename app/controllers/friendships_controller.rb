@@ -51,6 +51,20 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  # def update_with_name
+  #   respond_to do |format|
+
+  #     if @friendship.update(friendship_params)
+  #       format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @friendship }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @friendship.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
+
   # DELETE /friendships/1
   # DELETE /friendships/1.json
   def destroy
