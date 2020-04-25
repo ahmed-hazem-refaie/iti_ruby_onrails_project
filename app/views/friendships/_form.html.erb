@@ -10,21 +10,16 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label :friend_id %>
-    <%= form.text_field :friend_id %>
-  </div>
 
- <select class="browser-default custom-select" style="width=100px">
-  <option selected>Open this select menu</option>
-       <% @users.each do |user| %>
-           <option value='<%= friendship.friend_id %>'><%= user.email %></option>      
-       <% end %>
-  </select>
+  
+  
+
+  <%= form.select :friend_id, @users.collect {|u| [ u.email, u.id ] } %>
+
 
   <div class="field">
-    <%= form.label :group_id %>
-    <%= form.text_field :group_id %>
+    <% form.label :group_id %>
+    <%= form.hidden_field :group_id %>
   </div> 
 
   <div class="actions">

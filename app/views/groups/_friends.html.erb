@@ -1,0 +1,41 @@
+<div class="table-wrapper col-sm-6 shadow  m-3 p-4">
+<% if defined?(@users) %>
+    <div class="row table-title">
+        <div class="col-sm-8">
+            <h2><%= @group.name %> Group</h2>
+        </div>
+    </div>
+
+    <%= render 'add_friend', locals: { group: @group} %>
+    <div class="card-columns text-center m-2">
+
+           <% @users.each do |user| %>
+
+        <div class="card" style="width:150px">
+            <% if current_user.image != "" %>
+                <%= image_tag(user.image, class: "card-img-top", size: "100x100")%>   
+            <% else %>
+                 <%= image_tag(user.register_image, class: "card-img-top", size: "100x100")%>
+            <% end %>
+
+            <%# <img class="card-img-top" src="https://via.placeholder.com/100x100" alt="Friend Image"> %>
+            <div class="card-body">
+                <h4 class="card-title h6"><%= user.name %></h4>
+
+                <p class="card-text">
+                <%= link_to "Remove", remove_group_path(@group,user.id),method: :delete,data: { confirm: 'Are you sure you want to remove friend?' },class:"btn btn-danger" %>
+        
+                </p>
+            </div>
+            
+        </div>
+        <% end %>
+        </div>
+        
+        <% else %>
+        <p class="text-danger" style="margin-top:50px !important"> Please Select a Group</p>
+        <% end %>
+
+       
+
+</div> 

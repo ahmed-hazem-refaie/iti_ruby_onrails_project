@@ -5,19 +5,7 @@ class FriendshipsController < ApplicationController
   # GET /friendships.json
   def index
     @friendships = Friendship.all
-    p "*********************"
-    p Friendship.all
-    p "******$$$$"
-    # p Friendship.joins(:User).select('User.email, User.name')
-    # p Friendship.joins(:User).where('User.id' => 1)
-    q= User.find(id=1)
-    p "@@@@@@@@@@@@@@@@@@"
-    p q.email
-    # p Friendship
-    # q.first.t_id
-    # q.first.t_name
-    p "********************"
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @users=User.all
     @friendship = Friendship.new
     # render template: "friendships/new"
 
@@ -72,6 +60,20 @@ class FriendshipsController < ApplicationController
       end
     end
   end
+
+  # def update_with_name
+  #   respond_to do |format|
+
+  #     if @friendship.update(friendship_params)
+  #       format.html { redirect_to @friendship, notice: 'Friendship was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @friendship }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @friendship.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
+
 
   # DELETE /friendships/1
   # DELETE /friendships/1.json

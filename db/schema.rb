@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_035559) do
+ActiveRecord::Schema.define(version: 2020_04_25_005213) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
   create_table "friendships", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "friend_id", null: false
-    t.integer "group_id", null: false
+    t.integer "group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
@@ -64,9 +64,10 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
     t.text "body"
     t.integer "user_id"
     t.integer "order_id"
-    t.string "type"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "notification_type"
     t.index ["order_id"], name: "index_notifications_on_order_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -95,6 +96,9 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "image", default: "", null: false
+    t.string "register_image", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -104,8 +108,6 @@ ActiveRecord::Schema.define(version: 2020_04_22_035559) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
     t.string "uid"
-    t.string "name"
-    t.text "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

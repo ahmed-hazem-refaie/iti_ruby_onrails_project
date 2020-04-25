@@ -1,14 +1,18 @@
-<p id="notice"><%= notice %></p>
+ <div class="wrap">
+    <div class="container">
+    <%= link_to "Back to my Groups", groups_path,class:"btn btn-danger" %>
+        <h1>Groups</h1>
+        <div class="justify-content-between">
+            <%= render "groups/new", locals: { group: @group } %>
+        </div>
+        <div class="row">
+            <%= render 'groups' , locals: { groups: @groups }%>
+            <%= render 'friends', locals: { users: @users } %>
+        </div>
+    </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
 
-<p>
-  <strong>user:</strong>
-  <%= @group.user_id %>
-</p>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+
+ 
