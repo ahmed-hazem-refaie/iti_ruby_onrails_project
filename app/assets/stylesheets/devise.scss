@@ -1,4 +1,26 @@
+section.form-container {
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
 
-body{
-    background-color: #fc3;
+    .social {
+        border: 1px solid white;
+        padding: 5px;
+        margin: 5px;
+        display: inline-block;
+        width: 170px;
+        border-radius: 5px;
+        color: white;
+        &:hover{
+            text-decoration: none;
+        }
+    }
+
+    .Facebook {
+        background-color: #4267b2;
+    }
+
+    .Google {
+        background-color: #ea4335;
+    }
 }
