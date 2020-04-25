@@ -46,7 +46,7 @@ class FriendshipsController < ApplicationController
     
     @friendship = Friendship.new(friendship_params)
     @friendship.user_id=current_user.id
-
+    @users=User.all
     @current_user
     respond_to do |format|
       if @friendship.save
