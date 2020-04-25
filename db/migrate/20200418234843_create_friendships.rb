@@ -3,7 +3,7 @@ class CreateFriendships < ActiveRecord::Migration[6.0]
     create_table :friendships do |t|
       t.references :user, null: false, foreign_key: true
       t.references :friend, null: false
-      t.references :group, foreign_key: true
+      t.references :group, null: true, foreign_key: true
 
       t.timestamps
     end

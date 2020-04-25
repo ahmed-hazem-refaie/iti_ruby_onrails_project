@@ -4,7 +4,7 @@ class CreateNotifications < ActiveRecord::Migration[6.0]
       t.text :body
       t.belongs_to  :user
       t.belongs_to :order
-      t.string :type
+      t.string :status
 
       t.timestamps
     end
