@@ -3,12 +3,22 @@
     <button type="button" class="close" data-dismiss="modal">x</button>
     <h4 class="modal-title" id="myModalLabel">Invited friends</h4>
     </div>
-    <div class="modal-body">
-            <% @invited.each do |member| %>
-               <p> <%= member.user.email %></p>
-                <br>
-            <% end %>
+    <div class="modal-body" style='padding-left:100px;'>
+        <% @invited.each do |member| %>
+                
+            <div class="card " style="width:300px">    
+                <div class="card-body">
+                    <h4 class="card-title h6"><%= member.user.email %></h4>
+                    <p class="card-text">
+                    <p><%= member.order %></p>
+                    <%= link_to "Remove",'#',method: :delete,data: { confirm: 'Are you sure you want to remove friend?' },class:"btn btn-danger" %>
+            
+                    </p>
+                </div>
+                
+            </div>
+            
+        <% end %>
     </div>
     <div class="modal-footer">
-    <button class="btn btn-primary">Save</button>
 </div>

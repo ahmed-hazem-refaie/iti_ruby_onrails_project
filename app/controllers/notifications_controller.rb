@@ -59,6 +59,7 @@ class NotificationsController < ApplicationController
   # DELETE /notifications/1
   # DELETE /notifications/1.json
   def destroy
+    print "delllllllllllllllllete"
     @notification.destroy
     respond_to do |format|
       format.html { redirect_to notifications_url, notice: 'Notification was successfully destroyed.' }
