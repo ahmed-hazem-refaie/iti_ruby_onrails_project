@@ -12,15 +12,15 @@
   <% end %>
 
   
-  
   <div class="field">
     <%= form.label :friend_id %>
     <%= form.text_field :friend_id %>
   </div>
 
   <div class="field">
-    <%= form.label :group_id %>
-    <%= form.text_field :group_id %>
+    
+    <% form.label :group_id %>
+    <%= form.hidden_field :group_id %>
   </div> 
 
   <div class="actions">
