@@ -30,7 +30,7 @@ class OrderdetailsController < ApplicationController
 
     respond_to do |format|
       if @orderdetail.save
-        flash[:success] = "Orderdetail was successfully created."
+        flash[:success] = "Order details was successfully created."
         format.html { redirect_to :controller => 'orders', :action => 'show',:id => @order.id }
         format.json { render :show, status: :created, location: @orderdetail }
       else

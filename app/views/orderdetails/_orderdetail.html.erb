@@ -5,6 +5,6 @@
                 <td><%= orderdetail.price %></td>
                 <td><%= orderdetail.comment %></td> 
                 <% if (current_user == orderdetail.user ) %>
-                    <td><%= link_to 'Cancel',order_orderdetail_path(orderdetail.order_id , orderdetail), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <td><%= link_to 'Cancel',order_orderdetail_path(orderdetail.order_id , orderdetail),class: 'btn btn-danger ', method: :delete, data: { confirm: 'Are you sure?' } %></td>
                 <% end %>
 </tr>

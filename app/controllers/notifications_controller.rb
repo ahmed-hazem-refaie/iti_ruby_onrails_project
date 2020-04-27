@@ -59,11 +59,10 @@ class NotificationsController < ApplicationController
   # DELETE /notifications/1
   # DELETE /notifications/1.json
   def destroy
-    print "delllllllllllllllllete"
     @order=@notification.order
     @notification.destroy
     respond_to do |format|
-      format.html { redirect_to order_path(@order), notice: 'Notification was successfully destroyed.' }
+      format.html { redirect_to order_path(@order), notice: 'Invitation was successfully cannceled.' }
       format.json { head :no_content }
     end
   end

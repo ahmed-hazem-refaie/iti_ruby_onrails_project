@@ -24,9 +24,12 @@
     <br/>
     <div>
     <% if current_user == @order.user %>
-      <%= link_to (@invited_no).to_s+' friends invited click to view',invited_order_path(@order),  {:style=>'margin:10px;',method: "post" ,:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary '}  %>
-      <br>
-      <%= link_to (@accepted_no).to_s+' friends joined click to view',joined_order_path(@order),  {:style=>'margin:10px;',method: "post" ,:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal2-window', class: 'btn btn-primary '}  %>
+      <% if (@invited_no > 0)%>
+        <%= link_to (@invited_no).to_s+' friends invited click to view',invited_order_path(@order),  {:style=>'margin-top:50px;margin-right:10px;',method: "post" ,:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-info '}  %>
+      <% end %>
+      <% if (@accepted_no > 0)%>
+        <%= link_to (@accepted_no).to_s+' friends joined click to view',joined_order_path(@order),  {:style=>'margin:10px;',method: "post" ,:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal2-window', class: 'btn btn-info '}  %>
+      <% end %>
       <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content"></div>
@@ -40,13 +43,11 @@
     <% end %>
       
     </div>
-    <h3>Add order</h3>
     <%= render 'orderdetails/form' %>
-    <%= link_to 'Back',orders_path %>
+    <%= link_to 'Back',orders_path,class: 'btn btn-info ',style:'color:white !important;' %>
   </div>
   <div class="col" style="width:20px;margin-left:20px;" >
     <% if (@order.image.attached?)%>
-      <h3>Menu </h3>
       <%= image_tag(@order.image,class: "card-img-top", size: "350x350")  %>
         
     <%end%>

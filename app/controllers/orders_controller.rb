@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :invited, :joined]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :finish, :invited, :joined]
   before_action :authenticate_user!
   # GET /orders
   # GET /orders.json
@@ -27,7 +27,6 @@ class OrdersController < ApplicationController
   def invited
     @invited=Array.new
     if (current_user == @order.user )
-      print "ay 7aga"
       @invited=@order.notifications
     end
     print @invited
@@ -47,6 +46,20 @@ class OrdersController < ApplicationController
       format.js
     end
   end 
+
+  def finish
+      @order.status="finish"
+      respond_to do |format|
+        if (@order.save)
+          format.html { redirect_to orders_url }
+          format.json { render :show, status: :created, location: @orderdetail }
+        else
+          format.html { render :new }
+          format.json { render json: @orderdetail.errors, status: :unprocessable_entity }
+        end
+      end
+  end
+
   # GET /orders/new
   def new
     if params[:request_user]
@@ -84,6 +97,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order.status="waiting"
     if params[:userid]
     users=User.find(params[:userid])
     @order.users<<(users)
@@ -107,8 +121,8 @@ class OrdersController < ApplicationController
            n.save
              end
 
-      
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        flash[:success] =  'Order was successfully created.'
+        format.html { redirect_to @order}
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
