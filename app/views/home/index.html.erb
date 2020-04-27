@@ -14,9 +14,11 @@
     <div class="col-sm-12 col-md-6">
         <fieldset>
             <legend>Friends Activity</legend>
-            <% if @my_orders %>
-                <% @my_orders.each do |order| %>
-                    <h2> <%= order.order_for %> on <%= order.created_at %> </h2>
+            <% if @activities %>
+                <% @activities.each do |friend,activity| %>
+                    <% activity.each do |friend_activity| %>
+                     <p> <%= friend.name %> has created <%= friend_activity.action %> </p>
+                    <% end %>
                 <% end %>
             <% else %>
                 <h2> No Friends Activity</h2>

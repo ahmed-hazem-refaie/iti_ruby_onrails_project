@@ -120,7 +120,8 @@ class OrdersController < ApplicationController
           n.status="bending";
            n.save
              end
-
+        @activity="order for "+@order.order_for+" from "+@order.from
+        Activite.create(action:@activity,user:current_user)
         flash[:success] =  'Order was successfully created.'
         format.html { redirect_to @order}
         format.json { render :show, status: :created, location: @order }
