@@ -7,17 +7,18 @@
   <thead class="thead-dark">
     <tr>
       <%# <th>User</th> %>
-      <th scope="col">Friend</th>
-      
-      <th colspan="3"></th>
+      <th >Friend</th>
+      <th> </th>
+      <th ></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @friendships.each do |friendship| %>
+    <% for friendship in current_user.friendships%>
+    <%# <% @friendships.each do |friendship| %> 
       <tr>
         <td><%= friendship.friend.email %></td>
-        <td> <%= image_tag(friendship.friend.register_image, size: "160x100")%></td>
+        <td> <%= image_tag(friendship.friend.register_image, size: "100x100")%></td>
         <td><%= link_to 'Destroy', friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>  
     <% end %>
