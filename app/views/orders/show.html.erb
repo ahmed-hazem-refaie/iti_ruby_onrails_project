@@ -1,5 +1,8 @@
 <% flash.each do |key, value| %>
-  <div class="alert alert-info"><%= value %></div>
+  <% if key == "error" %>
+    <% key ="danger" %>
+  <% end %>
+  <div class="alert alert-<%= key %>"><%= value %></div>
 <% end %>
 
 <h1>Orderdetails</h1>
@@ -18,7 +21,10 @@
       </thead>
         
         <tbody>
-          <%= render @order.orderdetails %>
+          <% if ! @order.orderdetails.empty? %>
+            <p>hiiiii </p>
+              <%= render @order.orderdetails %>
+          <% end %>
         </tbody>
     </table>
     <br/>

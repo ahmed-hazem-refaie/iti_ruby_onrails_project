@@ -25,18 +25,27 @@ class OrderdetailsController < ApplicationController
   # POST /orderdetails.json
   def create
     @order = Order.find(params[:order_id])
-    @orderdetail = @order.orderdetails.create(params.require(:orderdetail).permit(:item, :amount, :price, :comment))
-    @orderdetail.user=current_user
-
-    respond_to do |format|
-      if @orderdetail.save
-        flash[:success] = "Order details was successfully created."
+    unless (params[:orderdetail][:item].empty? && params[:orderdetail][:amount].empty? && params[:orderdetail][:price].empty?)
+     @orderdetail = (@order.orderdetails.create(params.require(:orderdetail).permit(:item, :amount, :price, :comment))).valid?
+      @orderdetail.user=current_user
+      respond_to do |format|
+        if @orderdetail.save
+          
+            flash[:success] = "Order details was successfully created."
+            format.html { redirect_to :controller => 'orders', :action => 'show',:id => @order.id }
+            format.json { render :show, status: :created, location: @orderdetail }
+          
+        else
+          flash[:alert] = "error,cann't save."
+          format.html { render :new }
+          format.json { render json: @orderdetail.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        flash[:error] = "Please fill all fields."
         format.html { redirect_to :controller => 'orders', :action => 'show',:id => @order.id }
         format.json { render :show, status: :created, location: @orderdetail }
-      else
-        flash[:alert] = "error,cann't save."
-        format.html { render :new }
-        format.json { render json: @orderdetail.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,7 +71,7 @@ class OrderdetailsController < ApplicationController
         @orderdetail.destroy
     end
     respond_to do |format|
-      flash[:success] = "Orderdetail was successfully destroyed."
+      flash[:info] = "Orderdetail was successfully destroyed."
       format.html { redirect_to :controller => 'orders', :action => 'show',:id => @orderdetail.order_id }
       format.json { head :no_content }
     end

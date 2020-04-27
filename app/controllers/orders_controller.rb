@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.paginate(page: params[:page], per_page: 3)
+    @orders = Order.paginate(page: params[:page], per_page: 3).where(user:current_user)
     # if params[:search]
     #   @search_results_orders = Order.all[0..10]
     #   @par=params
