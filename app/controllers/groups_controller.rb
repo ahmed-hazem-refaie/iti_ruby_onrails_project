@@ -13,12 +13,20 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group = Group.find(params[:id])
-    @friends = Friendship.where(["group_id = ?", @group])
-    @users=[]
-    @friends.each do |friend|
-    @users.push(User.where(["id = ?", friend.friend_id]).first)
+    if @group.user_id == current_user.id
+      @friends = Friendship.where(["group_id = ?", @group])
+      @users=[]
+      @friends.each do |friend|
+      @users.push(User.where(["id = ?", friend.friend_id]).first)
+      end
+      @groups = current_user.groups
+    else
+      redirect_to root_path	
+
+      
     end
-    @groups = current_user.groups
+  
+    
 
   end
 
@@ -98,6 +106,7 @@ class GroupsController < ApplicationController
     end
     
   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
