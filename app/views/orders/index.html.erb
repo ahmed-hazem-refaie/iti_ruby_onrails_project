@@ -1,5 +1,5 @@
 <h1>Orders</h1>
-
+<div>
 <table class="table">
   <thead>
     <tr>
@@ -31,8 +31,10 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @orders, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
 </div>
+
 
 <br>
 
-<%= link_to 'Start New Order', new_order_path ,{:style=>'margin-left:130px;', :class => "btn btn-info"} %>
+<%= link_to 'Start New Order', new_order_path ,{:style=>'color:white !important;', :class => "btn btn-info"} %>
