@@ -18,6 +18,7 @@
         <td><%= order.order_for %></td>
         <td><%= order.from %></td>
         <td><%= order.notifications.count %></td>
+        <td><%= order.notifications.where(status:"accepted").count %></td>
         <td><%= order.status %></td>
         <td>
           <%= link_to 'View', order_path(order) %>
