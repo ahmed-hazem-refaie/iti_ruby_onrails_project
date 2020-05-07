@@ -26,3 +26,24 @@
         </fieldset>
     </div>
 </div>
+
+
+<div class="col-sm-12 col-md-6">
+<fieldset>
+    <legend>MY Notification</legend>
+    <% if @my_notification %>
+        <% @my_notification.each do |activity| %>
+            <hr>
+            <h3><%= activity.body %></h3>
+            <br>
+            <h3>With Status::<%= activity.status %></h3>
+
+            <hr>
+            
+            
+        <% end %>
+    <% else %>
+        <h2> No Friends Activity</h2>
+    <% end %>
+</fieldset>
+</div>
